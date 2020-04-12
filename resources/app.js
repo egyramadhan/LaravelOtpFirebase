@@ -392,7 +392,7 @@ $(document).ready(function() {
                     console.log(dataResult);
                     var dataResult = JSON.parse(dataResult);
                     if (dataResult.statusCode == 200) {
-                        window.location = "/index";
+                        console.log("success");
                     } else if (dataResult.statusCode == 201) {
                         alert("Error occured !");
                     }
