@@ -6,6 +6,7 @@
     <title>Phone Authentication </title>
 
     <!-- Material Design Theming -->
+    {{-- tampilan halaman html menggunakan materialize css  --}}
     <link
       rel="stylesheet"
       href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css"
@@ -49,6 +50,7 @@
 
               <form id="sign-in-form" method="POST" action="">
                 <input type="hidden" name="_token" id="csrf" value="{{Session::token()}}">
+                {{-- Input Name --}}
                 <div
                   class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                 >
@@ -62,7 +64,7 @@
                     >Enter your name...</label
                   >
                 </div>
-                <!-- Email -->
+                <!-- Input Email -->
                 <div
                   class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                 >
@@ -79,7 +81,7 @@
                     >Input is not an email</span
                   >
                 </div>
-                <!-- Input to enter the phone number -->
+                <!-- Input phone number -->
                 <div
                   class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                 >
@@ -172,16 +174,19 @@
         </div>
       </main>
     </div>
+    {{-- package yang dibutuhkan untuk javascript --}}
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"></script>
+    {{-- package menambahkan SDK Firebase  --}}
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+    {{-- memanggil file app.js --}}
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 </body>
 </html>

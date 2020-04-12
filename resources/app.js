@@ -1,4 +1,6 @@
-// Your web app's Firebase configuration
+/**
+ * Masukan parameter file konfigurasi untuk web yang didapat dari firebase
+ */
 var firebaseConfig = {
     apiKey: "AIzaSyBf-hMW0e_YAnaf-nGsQk6CmUWJedwOCqc",
     authDomain: "otptest-6933f.firebaseapp.com",
@@ -112,8 +114,8 @@ function onSignInSubmit(e) {
         window.signingIn = true;
         updateSignInButtonUI();
         // [START signin]
-        var name = getNameUserInput();
-        var email = getEmailUserInput();
+        // var name = getNameUserInput();
+        // var email = getEmailUserInput();
         var phoneNumber = getPhoneNumberFromUserInput();
         var appVerifier = window.recaptchaVerifier;
         firebase
@@ -330,15 +332,19 @@ function updateSignOutButtonUI() {
  */
 function updateSignedInUserStatusUI() {
     var user = firebase.auth().currentUser;
+    var names = getNameUserInput();
     if (user) {
+        // Update a user's profile
         user.updateProfile({
-            displayName: getNameUserInput()
+            displayName: names
         })
             .then(function() {
                 console.log("update name");
+                console.log(names);
             })
             .catch(function(error) {
                 console.log("failed update name");
+                console.log(names);
             });
         user.updateEmail(getEmailUserInput())
             .then(function() {
@@ -347,13 +353,14 @@ function updateSignedInUserStatusUI() {
             .catch(function(error) {
                 console.log("failed update email");
             });
+        //Get a user's provider-specific profile information
         if (user != null) {
             user.providerData.forEach(function(profile) {
-                console.log(" Sign-in provider: " + profile.providerId);
-                console.log("  Provider-specific UID: " + profile.uid);
-                console.log("  Name: " + profile.displayName);
-                console.log("  Email: " + profile.email);
-                console.log("  Photo URL: " + profile.photoURL);
+                console.log(" Sign-in provider: " + user.providerId);
+                console.log("  Provider-specific UID: " + user.uid);
+                console.log("  Name: " + user.displayName);
+                console.log("  Email: " + user.email);
+                console.log("  Photo URL: " + user.photoURL);
             });
         }
         document.getElementById("sign-in-status").textContent = "Signed in";
@@ -377,7 +384,7 @@ $(document).ready(function() {
         var email = $("#email").val();
         var phone = $("#phone-number").val();
         if (name != "" && email != "" && phone != "") {
-            //   $("#butsave").attr("disabled", "disabled");
+            //post data to database in table users
             $.ajax({
                 url: "/users",
                 type: "POST",
